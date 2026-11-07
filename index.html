@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MUST Apply student application portal sign-in and account creation interfaces.">
+  <title>MUST Apply | Student Portal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Shared page shell: branding panel + authentication panel -->
+  <main class="auth-shell">
+    <aside class="brand-panel" aria-label="MUST Apply portal introduction">
+      <a class="brand" href="#" aria-label="MUST Apply home">
+        <span class="brand-mark">M</span>
+        <span class="brand-name">MUST <strong>APPLICATION</strong></span>
+      </a>
+
+      <div class="brand-copy">
+        <p class="eyebrow">STUDENT APPLICATION PORTAL</p>
+        <h1>Your next chapter<br><span>starts here.</span></h1>
+        <p class="intro">One simple place to begin your journey with Mbarara University of Science and Technology.</p>
+      </div>
+
+      <!-- Decorative CSS artwork; no external image dependency -->
+      <div class="campus-art" aria-hidden="true">
+        <div class="sun"></div>
+        <div class="building building-back"></div>
+        <div class="building building-front">
+          <div class="roof"></div>
+          <div class="windows">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <div class="entrance"></div>
+        </div>
+        <div class="ground"></div>
+      </div>
+
+      <div class="brand-footer">
+        <span class="status-dot"></span>
+        <span>APPLICATIONS · YOUR FUTURE · MUST</span>
+      </div>
+    </aside>
+
+    <section class="form-panel">
+      <div class="mobile-brand">
+        <span class="brand-mark">M</span>
+        <span class="brand-name">MUST <strong>APPLY</strong></span>
+      </div>
+
+      <!-- Login interface -->
+      <section class="auth-card" id="login-view" aria-labelledby="login-title">
+        <p class="eyebrow gold-text">WELCOME BACK</p>
+        <h2 id="login-title">Sign in to your account</h2>
+        <p class="form-intro">Continue where you left off in your application.</p>
+
+        <form id="login-form">
+          <div class="field">
+            <label for="login-email">Email address</label>
+            <input id="login-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+          </div>
+
+          <div class="field">
+            <div class="label-row">
+              <label for="login-password">Password</label>
+              <a href="#forgot" id="forgot-link">Forgot password?</a>
+            </div>
+            <input id="login-password" name="password" type="password" placeholder="Enter your password" autocomplete="current-password" required minlength="8">
+          </div>
+
+          <label class="check-row">
+            <input type="checkbox" name="remember">
+            <span>Remember me on this device</span>
+          </label>
+
+          <button class="primary-button" type="submit">SIGN IN <span aria-hidden="true">→</span></button>
+          <p class="form-message" id="login-message" role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="switch-copy">New to MUST Apply? <button class="text-button" type="button" data-show="register">Create an account</button></p>
+      </section>
+
+      <!-- Account creation interface -->
+      <section class="auth-card" id="register-view" aria-labelledby="register-title" hidden>
+        <p class="eyebrow gold-text">GET STARTED</p>
+        <h2 id="register-title">Create your account</h2>
+        <p class="form-intro">Register to begin your application journey.</p>
+
+        <form id="register-form">
+          <div class="field">
+            <label for="full-name">Full name</label>
+            <input id="full-name" name="fullName" type="text" placeholder="Enter your full name" autocomplete="name" required minlength="2">
+          </div>
+
+          <div class="field">
+            <label for="register-email">Email address</label>
+            <input id="register-email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+          </div>
+
+          <div class="field">
+            <label for="register-password">Create password</label>
+            <input id="register-password" name="password" type="password" placeholder="At least 8 characters" autocomplete="new-password" required minlength="8">
+            <small class="field-hint">Use at least 8 characters.</small>
+          </div>
+
+          <label class="check-row terms-row">
+            <input type="checkbox" name="terms" required>
+            <span>I confirm that the details provided are accurate.</span>
+          </label>
+
+          <button class="primary-button" type="submit">CREATE ACCOUNT <span aria-hidden="true">→</span></button>
+          <p class="form-message" id="register-message" role="status" aria-live="polite"></p>
+        </form>
+
+        <p class="switch-copy">Already have an account? <button class="text-button" type="button" data-show="login">Sign in</button></p>
+      </section>
+
+      <footer class="form-footer">
+        <span>MUST APPLY PORTAL</span>
+        <span class="footer-separator">•</span>
+        <span>STUDENT ACCESS</span>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    // Switch between the two authentication interfaces without reloading.
+    const loginView = document.getElementById("login-view");
+    const registerView = document.getElementById("register-view");
+
+    function showView(viewName) {
+      const showRegister = viewName === "register";
+      loginView.hidden = showRegister;
+      registerView.hidden = !showRegister;
+      // Move keyboard focus to the new heading for accessibility.
+      document.getElementById(showRegister ? "register-title" : "login-title").focus();
+    }
+
+    document.querySelectorAll("[data-show]").forEach((button) => {
+      button.addEventListener("click", () => showView(button.dataset.show));
+    });
+
+    // Demo-only form handling: HTML validation runs, but no account is stored
+    // and no authentication server is contacted by this front-end prototype.
+    document.getElementById("login-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      document.getElementById("login-message").textContent =
+        "Demo interface: connect this form to the university authentication service to sign in.";
+    });
+
+    document.getElementById("register-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      document.getElementById("register-message").textContent =
+        "Form validated in this demo. Connect a secure back end to create the account.";
+    });
+
+    // Password recovery is shown as a prototype message until a recovery
+    // service and email-verification flow are connected.
+    document.getElementById("forgot-link").addEventListener("click", (event) => {
+      event.preventDefault();
+      document.getElementById("login-message").textContent =
+        "Password recovery needs to be connected to the portal's verified email recovery service.";
+    });
+  </script>
+</body>
+</html>

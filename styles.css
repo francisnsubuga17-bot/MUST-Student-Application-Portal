@@ -1,0 +1,602 @@
+/* =========================================================
+   MUST APPLY — Student Portal
+   Stylesheet: styles.css
+   Purpose: responsive login and account creation interfaces
+   ========================================================= */
+
+/* 1. Design tokens: keep colours and radii consistent */
+:root {
+  --navy-950: #081323;
+  --navy-900: #0b1729;
+  --navy-800: #12243c;
+  --navy-700: #203954;
+  --gold: #e1b451;
+  --gold-hover: #efc66d;
+  --white: #ffffff;
+  --text: #17243a;
+  --muted: #6f7c90;
+  --line: #dce2ea;
+  --surface: #f5f7fa;
+  --radius: 18px;
+  --shadow: 0 24px 70px rgba(2, 10, 22, 0.2);
+}
+
+/* 2. Reset and accessible defaults */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background: var(--navy-950);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  padding: 28px;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(ellipse at 12% 15%, rgba(40, 69, 105, 0.32), transparent 36%),
+    var(--navy-950);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button,
+a,
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: #a87512;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+a:hover,
+.text-button:hover {
+  text-decoration: underline;
+}
+
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* 3. Main two-column application shell */
+.auth-shell {
+  width: min(1080px, 100%);
+  min-height: 690px;
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 26px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+
+/* 4. Left branding panel */
+.brand-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 690px;
+  padding: 42px 42px 28px;
+  overflow: hidden;
+  color: var(--white);
+  background:
+    linear-gradient(145deg, rgba(18, 36, 60, 0.96), rgba(8, 19, 35, 0.98));
+}
+
+.brand {
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  color: var(--white);
+  text-decoration: none;
+}
+
+.brand-mark {
+  width: 44px;
+  height: 44px;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border-radius: 13px;
+  background: var(--gold);
+  color: var(--navy-900);
+  font-size: 27px;
+  font-weight: 900;
+}
+
+.brand-name {
+  font-size: 20px;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+  white-space: nowrap;
+}
+
+.brand-name strong {
+  color: var(--gold);
+}
+
+.brand-copy {
+  position: relative;
+  z-index: 2;
+  margin-top: 92px;
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+}
+
+.brand-panel .eyebrow {
+  color: #b3c0d2;
+}
+
+.brand-copy h1 {
+  margin: 0;
+  font-size: clamp(35px, 3.5vw, 48px);
+  line-height: 1.12;
+  letter-spacing: -0.045em;
+}
+
+.brand-copy h1 span {
+  color: var(--gold);
+}
+
+.intro {
+  max-width: 330px;
+  margin-top: 22px;
+  color: #bac6d6;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* 5. Campus artwork made entirely from CSS shapes */
+.campus-art {
+  position: relative;
+  height: 205px;
+  margin: auto -42px 15px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(37, 62, 91, 0.08), rgba(35, 59, 87, 0.58));
+}
+
+.sun {
+  position: absolute;
+  top: 22px;
+  right: 72px;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: rgba(225, 180, 81, 0.95);
+  box-shadow: 0 0 45px rgba(225, 180, 81, 0.22);
+}
+
+.building {
+  position: absolute;
+  bottom: 28px;
+  background: #203954;
+  border: 1px solid rgba(225, 180, 81, 0.3);
+}
+
+.building-back {
+  right: 20px;
+  width: 110px;
+  height: 91px;
+  opacity: 0.75;
+}
+
+.building-front {
+  left: 55px;
+  width: 235px;
+  height: 120px;
+  background: #172d47;
+}
+
+.roof {
+  position: absolute;
+  top: -17px;
+  left: -8px;
+  width: calc(100% + 16px);
+  height: 18px;
+  background: var(--gold);
+  clip-path: polygon(3% 100%, 7% 0, 93% 0, 97% 100%);
+}
+
+.windows {
+  display: grid;
+  grid-template-columns: repeat(4, 20px);
+  justify-content: space-evenly;
+  gap: 13px 7px;
+  padding: 20px 18px;
+}
+
+.windows i {
+  height: 17px;
+  border: 1px solid rgba(225, 180, 81, 0.55);
+  background: rgba(225, 180, 81, 0.13);
+}
+
+.entrance {
+  position: absolute;
+  bottom: 0;
+  left: 95px;
+  width: 42px;
+  height: 47px;
+  border: 2px solid rgba(225, 180, 81, 0.7);
+  border-bottom: 0;
+  background: #0b1729;
+}
+
+.ground {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 29px;
+  background: #10243a;
+  border-top: 1px solid rgba(225, 180, 81, 0.25);
+}
+
+.brand-footer {
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #8d9cb1;
+  font-size: 9px;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+}
+
+/* 6. Right form panel and form typography */
+.form-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px clamp(32px, 5.5vw, 70px) 28px;
+  background: #fff;
+}
+
+.mobile-brand {
+  display: none;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+}
+
+.auth-card[hidden] {
+  display: none;
+}
+
+.gold-text {
+  color: #a87512;
+}
+
+.auth-card h2 {
+  margin: 0;
+  color: var(--navy-900);
+  font-size: clamp(27px, 2.7vw, 34px);
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+
+.form-intro {
+  margin: 12px 0 30px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+/* 7. Labels, inputs, checkbox, and validation states */
+.field {
+  margin-bottom: 21px;
+}
+
+.field label,
+.label-row label {
+  display: block;
+  margin-bottom: 9px;
+  color: #243249;
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.label-row a {
+  margin-bottom: 9px;
+  font-size: 11px;
+}
+
+.field input {
+  display: block;
+  width: 100%;
+  min-height: 51px;
+  padding: 0 15px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  outline: none;
+  color: var(--text);
+  background: #fbfcfe;
+  font-size: 14px;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.field input::placeholder {
+  color: #98a3b3;
+}
+
+.field input:focus {
+  border-color: #bd8e2b;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(225, 180, 81, 0.16);
+}
+
+.field input:invalid:not(:placeholder-shown) {
+  border-color: #c65b54;
+}
+
+.field-hint {
+  display: block;
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.check-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin: 2px 0 23px;
+  color: #68758a;
+  font-size: 12px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.check-row input {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 auto;
+  margin: 1px 0 0;
+  accent-color: #b98520;
+}
+
+.terms-row {
+  margin-top: 0;
+}
+
+/* 8. Main action button and navigation links */
+.primary-button {
+  width: 100%;
+  min-height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--gold);
+  color: var(--navy-900);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+.primary-button:hover {
+  background: var(--gold-hover);
+  transform: translateY(-1px);
+}
+
+.primary-button:active {
+  transform: translateY(0);
+}
+
+.primary-button span {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.switch-copy {
+  margin: 25px 0 0;
+  color: #778296;
+  text-align: center;
+  font-size: 12px;
+}
+
+.text-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #a87512;
+  font-size: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.form-message {
+  min-height: 0;
+  margin: 12px 0 0;
+  color: #52647b;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.form-footer {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 45px;
+  padding-top: 20px;
+  border-top: 1px solid #e9edf2;
+  color: #9aa4b2;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+.footer-separator {
+  color: var(--gold);
+}
+
+/* 9. Tablet and mobile layout */
+@media (max-width: 820px) {
+  body {
+    padding: 18px;
+  }
+
+  .auth-shell {
+    grid-template-columns: 0.82fr 1.18fr;
+  }
+
+  .brand-panel {
+    padding: 32px 25px 24px;
+  }
+
+  .brand-name {
+    font-size: 16px;
+  }
+
+  .brand-copy {
+    margin-top: 75px;
+  }
+
+  .campus-art {
+    margin-right: -25px;
+    margin-left: -25px;
+  }
+
+  .building-front {
+    left: 25px;
+    width: 210px;
+  }
+
+  .form-panel {
+    padding: 45px 30px 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    display: block;
+    padding: 0;
+    background: var(--navy-900);
+  }
+
+  .auth-shell {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  /* On phones, replace the large artwork panel with a compact header. */
+  .brand-panel {
+    display: none;
+  }
+
+  .form-panel {
+    flex: 1;
+    justify-content: flex-start;
+    padding: 26px 24px 22px;
+  }
+
+  .mobile-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    margin: 0 auto 48px;
+  }
+
+  .mobile-brand .brand-mark {
+    width: 42px;
+    height: 42px;
+  }
+
+  .mobile-brand .brand-name {
+    color: var(--navy-900);
+    font-size: 18px;
+  }
+
+  .auth-card {
+    max-width: 440px;
+  }
+
+  .form-intro {
+    margin-bottom: 26px;
+  }
+
+  .field {
+    margin-bottom: 19px;
+  }
+
+  .form-footer {
+    margin-top: auto;
+    padding-top: 24px;
+  }
+}
+
+@media (max-width: 360px) {
+  .form-panel {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .mobile-brand {
+    margin-bottom: 36px;
+  }
+
+  .label-row {
+    align-items: flex-start;
+  }
+}
+
+/* 10. Respect users who prefer reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
